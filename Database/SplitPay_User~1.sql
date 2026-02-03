@@ -46,3 +46,30 @@ CREATE TABLE expense_shares (
     CONSTRAINT fk_share_user FOREIGN KEY (user_id) REFERENCES app_users(user_id)
 );
 
+alter TABLE app_users ADD public_id VARCHAR2(36) UNIQUE NOT NULL;
+
+select * from app_users;
+TRUNCATE table app_users;
+DESCRIBE app_users;
+
+alter table group_members add CONSTRAINT uq_group_user UNIQUE (group_id, user_id);
+
+ALTER TABLE expense_shares
+ADD CONSTRAINT uq_expense_user UNIQUE (expense_id, user_id);
+
+ALTER TABLE group_members
+ADD CONSTRAINT chk_is_admin
+CHECK (is_admin IN ('Y','N'));
+
+ALTER TABLE expense_shares
+ADD CONSTRAINT chk_is_paid
+CHECK (is_paid IN ('Y','N'));
+
+CREATE INDEX idx_group_members_group ON group_members(group_id);
+CREATE INDEX idx_group_members_user ON group_members(user_id);
+
+CREATE INDEX idx_expenses_group ON expenses(group_id);
+CREATE INDEX idx_expenses_paid_by ON expenses(paid_by);
+
+CREATE INDEX idx_expense_shares_expense ON expense_shares(expense_id);
+CREATE INDEX idx_expense_shares_user ON expense_shares(user_id);

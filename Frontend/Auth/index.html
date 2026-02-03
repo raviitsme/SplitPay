@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SplitPay Auth</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+        <div class="auth-box">
+
+            <!-- REGISTER -->
+            <form class="auth-form active" id="registerForm">
+                <h2>Create Account</h2>
+
+                <input id="reg-name" type="text" placeholder="Full Name" autocomplete="off">
+                <input id="reg-email" type="email" placeholder="Email Address" autocomplete="off">
+                <input id="reg-password" type="password" placeholder="Password" autocomplete="new-password">
+
+                <p id="msg"></p>
+
+                <button class="form-btn" type="submit">Register</button>
+
+                <p class="switch-text">
+                    Already have an account?
+                    <a href="#" id="switchToLogin">Login</a>
+                </p>
+            </form>
+
+            <!-- LOGIN -->
+            <form class="auth-form" id="loginForm">
+                <h2>Welcome Back</h2>
+
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+
+                <button class="form-btn">Login</button>
+
+                <p class="switch-text">
+                    New to Split<span class="pay">Pay</span>?
+                    <a href="#" id="switchToRegister">Register</a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
