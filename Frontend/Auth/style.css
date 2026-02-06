@@ -44,6 +44,11 @@
     animation: fadeUp 0.35s ease;
 }
 
+#pass-error {
+    font-family: var(--content);
+    font-size: small;
+}
+
 .auth-form.active {
     display: flex;
 }
@@ -63,6 +68,7 @@
     font-size: 14px;
     outline: none;
     transition: 0.3s ease;
+    font-family: var(--content);
 }
 
 .auth-form input:focus {
@@ -87,6 +93,12 @@
     text-align: center;
     color: #bbb;
     font-family: var(--content);
+}
+
+#errorMsg {
+    font-family: var(--headings);
+    font-size: small;
+    color: red;
 }
 
 .switch-text a {

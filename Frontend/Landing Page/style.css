@@ -121,6 +121,11 @@ html {
     box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.35);
 }
 
+.cta-btn a {
+    text-decoration: none;
+    color: black;
+}
+
 /* First Section */
 
 .intro {
@@ -475,6 +480,11 @@ html {
     font-family: var(--headings);
     font-weight: 600;
     transition: background 0.2s ease, transform 0.2s ease, border 0.3s ease;
+}
+
+.get-started-actions a {
+    text-decoration: none;
+    color: black;
 }
 
 .get-started-actions .login:hover {

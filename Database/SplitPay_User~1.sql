@@ -52,6 +52,10 @@ select * from app_users;
 TRUNCATE table app_users;
 DESCRIBE app_users;
 
+alter table app_users modify created_at default systimestamp;
+
+delete from app_users where user_id = 30;
+
 alter table group_members add CONSTRAINT uq_group_user UNIQUE (group_id, user_id);
 
 ALTER TABLE expense_shares

@@ -1,14 +1,17 @@
 const express = require('express');
 const { getConnection, initPool } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(cors({
   origin : 'http://localhost:5500',
-  methods : ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  methods : ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials : true
 }))
-
+app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', async (req, res) => {
@@ -38,6 +41,8 @@ app.get('/', async (req, res) => {
 // }); 
 
 app.use('/authentication', authRoutes);
+
+app.use('/dashboard', dashboardRoutes);
 
 // Start server
 initPool().then(() => {

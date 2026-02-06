@@ -25,6 +25,7 @@
                 <input id="reg-name" type="text" placeholder="Full Name" autocomplete="off">
                 <input id="reg-email" type="email" placeholder="Email Address" autocomplete="off">
                 <input id="reg-password" type="password" placeholder="Password" autocomplete="new-password">
+                <p id="pass-error"></p>
 
                 <p id="msg"></p>
 
@@ -40,10 +41,10 @@
             <form class="auth-form" id="loginForm">
                 <h2>Welcome Back</h2>
 
-                <input type="email" placeholder="Email Address" required>
-                <input type="password" placeholder="Password" required>
-
-                <button class="form-btn">Login</button>
+                <input type="email" placeholder="Email Address" id="email" autocomplete="off">
+                <input type="password" placeholder="Password" id="password" autocomplete="new-password">
+                <p id="errorMsg"></p>
+                <button class="form-btn" type="submit">Login</button>
 
                 <p class="switch-text">
                     New to Split<span class="pay">Pay</span>?
