@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SplitPay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome 6 ONLY -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Inter&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h1 class="logo">Split<span>Pay</span></h1>
+            <nav class="menu">
+                <a class="menu-item active" data-page="dashboard"><i class="fa-solid fa-chart-line"></i>
+                    Dashboard</a>
+                <a class="menu-item" data-page="groups"><i class="fa-solid fa-users"></i>
+                    Groups</a>
+                <a class="menu-item" data-page="expenses"><i class="fa-solid fa-receipt"></i>
+                    Expenses</a>
+                <a class="menu-item" data-page="settings"><i class="fa-solid fa-gear"></i>
+                    Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <h2 class="page-title">Dashboard</h2>
+                <i class="fa-solid fa-moon theme"></i>
+
+            </header>
+
+            <section class="page active" id="dashboard">
+                <div class="cards">
+                    <div class="card">
+                        <h3>Total Balance</h3>
+                        <p id="totalBalance">₹0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>You Owe</h3>
+                        <p id="youOwe">₹0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>You Get</h3>
+                        <p id="youGet">₹0</p>
+                    </div>
+                </div>
+            </section>
+            <!-- GROUPS PAGE -->
+            <section class="page" id="groups" data-page="groups">
+
+                <!-- Groups Header -->
+                <header class="groups-header" id="groups-header">
+                    <div class="groups-title">
+                        <h1 class="groups-heading">Groups</h1>
+                        <p class="groups-subtitle">Manage your shared expenses</p>
+                    </div>
+
+                    <button class="btn btn-primary" id="create-group-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        New Group
+                    </button>
+                </header>
+
+
+                <div class="groups-list">
+
+                    <div class="group-card" data-group-id="1">
+                        <div class="group-left">
+                            <h4 class="group-name">Friends Trip</h4>
+                            <span class="group-members">4 members</span>
+                        </div>
+
+                        <div class="group-right positive">
+                            + ₹620
+                        </div>
+                    </div>
+
+                    <div class="group-card" data-group-id="2">
+                        <div class="group-left">
+                            <h4 class="group-name">Roommates</h4>
+                            <span class="group-members">3 members</span>
+                        </div>
+
+                        <div class="group-right negative">
+                            − ₹340
+                        </div>
+                    </div>
+
+                </div>
+                <div class="groups-empty" id="groupsEmpty">
+                    <i class="fa-solid fa-users-slash"></i>
+                    <p>No groups yet</p>
+                    <span>Create a group to start splitting expenses</span>
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
