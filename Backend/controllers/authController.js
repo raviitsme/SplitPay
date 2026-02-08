@@ -81,7 +81,7 @@ exports.loginUser = async (req, res) => {
     try {
         connection = await getConnection();
         const result = await connection.execute(
-            `Select PUBLIC_ID, USER_PASSWORD FROM app_users where email = :email`,
+            `Select USER_ID, PUBLIC_ID, USER_PASSWORD FROM app_users where email = :email`,
             { email }
         );
 
@@ -103,11 +103,13 @@ exports.loginUser = async (req, res) => {
         }
 
         const token = jwt.sign(
-            {publicID : user.PUBLIC_ID},
+            {publicID : user.PUBLIC_ID,
+                user_id : user.USER_ID
+            },
             process.env.JWT_SECRET,
             { expiresIn : '1d' }
         );
-
+        console.log(user.USER_ID);
         res.cookie('token', token, {
             httpOnly : true,
             secure : false,
@@ -126,4 +128,24 @@ exports.loginUser = async (req, res) => {
             await connection.close();
         }
     }
+}
+
+exports.logoutUser = (req, res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: false,   
+        sameSite: 'lax'  
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Logout successful"
+    });
+};
+
+exports.checkAuth = (req, res) => {
+    res.status(200).json({
+        success : true,
+        user : req.user
+    });
 }

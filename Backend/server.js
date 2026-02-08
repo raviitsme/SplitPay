@@ -2,6 +2,7 @@ const express = require('express');
 const { getConnection, initPool } = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const groupRoutes = require('./routes/groupRoutes');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -17,6 +18,8 @@ app.use(express.json());
 app.get('/', async (req, res) => {
   res.send("Backend running...");
 })
+
+
 
 // app.get('/users', async (req, res) => {
 //   let connection;
@@ -43,6 +46,9 @@ app.get('/', async (req, res) => {
 app.use('/authentication', authRoutes);
 
 app.use('/dashboard', dashboardRoutes);
+
+app.use('/groups', groupRoutes);
+
 
 // Start server
 initPool().then(() => {
