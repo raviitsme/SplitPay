@@ -30,9 +30,12 @@ const mode = params.get('mode');
 if (mode === 'login') {
     loginForm.classList.add('active');
     registerForm.classList.remove('active');
-} else {
+} else if (mode === 'register') {
     registerForm.classList.add('active');
     loginForm.classList.remove('active');
+} else {
+    loginForm.classList.add('active');
+    registerForm.classList.remove('active');
 }
 
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
@@ -100,24 +103,24 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value.trim();
     const msg = document.getElementById('errorMsg');
 
-    if(!email || !password) {
+    if (!email || !password) {
         msg.textContent = 'Please enter all fields!';
         return;
     }
 
     try {
         const response = await fetch('http://localhost:3000/authentication/login', {
-            method : "POST",
-            headers : {
+            method: "POST",
+            headers: {
                 'Content-Type': 'application/json'
             },
-            credentials : "include",
-            body : JSON.stringify({ email, password })
+            credentials: "include",
+            body: JSON.stringify({ email, password })
         });
 
         const result = await response.json();
 
-        if(!result.success){
+        if (!result.success) {
             msg.textContent = result.message;
             return;
         }
@@ -125,9 +128,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         msg.style.color = 'rgb(157, 255, 150)';
         msg.textContent = 'Successfully logged in...';
 
-        window.location.href = '../Dashboard/index.html';        
+        window.location.href = '../Dashboard/index.html';
     } catch (err) {
         console.error("Error : ", err);
         msg.textContent = 'Some server error occurred!'
     }
 })
+

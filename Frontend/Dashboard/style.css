@@ -13,9 +13,10 @@
     /* Colors – Light */
     --bg-main: #f0fdf5;
     --bg-card: #ffffff;
-
+    --button-bg: #3b3a3af1;
     --text-main: #111111;
     --text-muted: #666666;
+    --table-row-color : #f4f7f5;
 
     --border: rgba(0, 0, 0, 0.08);
     --line: #000000;
@@ -37,15 +38,13 @@
 [data-theme="dark"] {
     --bg-main: #0e0f12;
     --bg-card: #17191f;
-
+    --button-bg: white;
     --text-main: #f2f2f2;
     --text-muted: #a1a1aa;
-
+    --table-row-color : #202124;
     --border: rgba(255, 255, 255, 0.08);
     --line: #ffffff;
     --cta-btn : inset 0 0 0 3px rgba(0, 0, 0, 0.35);
-
-
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     --shadow-hover: 0 2px 12px var(--accent);
 
@@ -136,6 +135,10 @@ body::before {
 
 .menu-item i {
     font-size: 18px;
+}
+
+#logout:hover {
+    background: rgb(255, 145, 145);
 }
 
 .menu-item:hover,
@@ -291,6 +294,89 @@ html[data-theme="dark"] .theme::before {
     font-weight: 600;
 }
 
+/* ===============================
+   GROUPS TABLE
+================================ */
+
+/* ===============================
+   GROUPS TABLE
+================================ */
+
+.groups-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+    font-family: var(--headings);
+}
+
+/* ---------- Header ---------- */
+
+.groups-table thead {
+    background: var(--bg-card);
+}
+
+.groups-table thead th {
+    padding: 16px 20px;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Body ---------- */
+
+.groups-table tbody tr {
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.groups-table tbody tr:hover {
+    background: rgba(157, 255, 150, 0.08);
+    transform: translateX(4px);
+}
+
+.groups-table tbody td {
+    padding: 14px 20px;
+    background: var(--table-row-color);
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+}
+
+/* Group ID highlight */
+.groups-table tbody td:first-child {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Remove border from last row */
+.groups-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.actions button:hover {
+    color: #fff;
+}
+
+
 /* =========================
    GROUPS LIST
 ========================= */
@@ -349,16 +435,23 @@ html[data-theme="dark"] .theme::before {
    EMPTY STATE (OPTIONAL)
 ========================= */
 .groups-empty {
+    display: none;
+    height: 220px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #aaa;
     text-align: center;
-    padding: 60px 20px;
-    color: var(--text-muted);
+    font-size: 15px;
 }
 
 .groups-empty i {
-    font-size: 48px;
-    margin-bottom: 16px;
-    color: var(--green);
+    font-size: 42px;
+    margin-bottom: 10px;
+    color: var(--button-bg);
 }
+
+
 
 .groups-empty p {
     font-size: 15px;
@@ -442,6 +535,97 @@ html[data-theme="dark"] .theme::before {
 
 .group-right.negative {
     color: #ff6b6b;
+}
+
+.new-group-modal-container {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none; /* IMPORTANT */
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    background-size: 40px 40px;
+    backdrop-filter: blur(10px);
+}
+
+.new-group-modal {
+    position: relative;
+    z-index: 1; 
+    background-size: 40px 40px;
+    width: 420px;
+    padding: 24px;
+    background: var(--grid-bg);
+    border-radius: 18px;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+
+.new-group-modal h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.new-group-modal input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    background: var(--bg-main);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.new-group-modal input::placeholder {
+    color: #777;
+}
+
+.new-group-modal input:focus {
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 15px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 8px;
+    color: var(--bg-card);
+    background: var(--button-bg);
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--accent);
+    box-shadow: var(--cta-btn);
+    transform: scale(1.09);
+    color: black;
+}
+
+.btn-secondary {
+    border: 1.5px solid black;
+    color: var(--bg-main);
+}
+
+.btn-secondary:hover {
+    background: rgb(242, 60, 60);
 }
 
 

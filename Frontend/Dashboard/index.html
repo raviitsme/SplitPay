@@ -15,6 +15,21 @@
 
 
 <body>
+    <div class="new-group-modal-container">
+        <div class="new-group-modal">
+            <h2>Create New Group</h2>
+
+            <input type="text" id="groupName" placeholder="Group name" required />
+
+            <input type="text" id="groupMembers" placeholder="Members (comma separated)" />
+            <p id="errorMsg"></p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelGroup">Cancel</button>
+                <button class="btn btn-primary" id="saveGroup" onclick="createGroup()">Create Group</button>
+            </div>
+
+        </div>
+    </div>
     <div class="dashboard">
         <aside class="sidebar">
             <h1 class="logo">Split<span>Pay</span></h1>
@@ -27,6 +42,7 @@
                     Expenses</a>
                 <a class="menu-item" data-page="settings"><i class="fa-solid fa-gear"></i>
                     Settings</a>
+                <a class="menu-item" id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
             </nav>
         </aside>
 
@@ -56,6 +72,7 @@
                 </div>
             </section>
             <!-- GROUPS PAGE -->
+
             <section class="page" id="groups" data-page="groups">
 
                 <!-- Groups Header -->
@@ -71,32 +88,34 @@
                     </button>
                 </header>
 
+                <table class="groups-table">
+                    <thead>
+                        <tr>
+                            <th>Group ID</th>
+                            <th>Group Name</th>
+                            <th>Created By</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="groupsTableBody">
+                        <!-- <tr>
+                            <td>#G001</td>
+                            <td>Roommates</td>
+                            <td>Rahul</td>
+                        </tr>
+                        <tr>
+                            <td>#G002</td>
+                            <td>Goa Trip</td>
+                            <td>Ananya</td>
+                        </tr>
+                        <tr>
+                            <td>#G003</td>
+                            <td>Office Lunch</td>
+                            <td>You</td>
+                        </tr> -->
+                    </tbody>
+                </table>
 
-                <div class="groups-list">
-
-                    <div class="group-card" data-group-id="1">
-                        <div class="group-left">
-                            <h4 class="group-name">Friends Trip</h4>
-                            <span class="group-members">4 members</span>
-                        </div>
-
-                        <div class="group-right positive">
-                            + ₹620
-                        </div>
-                    </div>
-
-                    <div class="group-card" data-group-id="2">
-                        <div class="group-left">
-                            <h4 class="group-name">Roommates</h4>
-                            <span class="group-members">3 members</span>
-                        </div>
-
-                        <div class="group-right negative">
-                            − ₹340
-                        </div>
-                    </div>
-
-                </div>
                 <div class="groups-empty" id="groupsEmpty">
                     <i class="fa-solid fa-users-slash"></i>
                     <p>No groups yet</p>
