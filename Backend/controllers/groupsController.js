@@ -113,3 +113,81 @@ exports.getGroups = async (req, res) => {
         if(connection) await connection.close();
     }
 }
+
+exports.getGroupDetails = async (req, res) => {
+    const { groupID } = req.params;
+    const { user_id } = req.user;
+
+    let connection;
+    try {
+        connection = await getConnection();
+        console.log("AUTH USER:", req.user, groupID);
+
+        const checkAuth = await connection.execute(
+            `SELECT 1 FROM group_members 
+            WHERE group_id = :1 and user_id = :2
+            `,
+            [groupID, user_id]
+        );
+
+        if(checkAuth.rows.length === 0) {
+            return res.status(403).json({
+                success : false,
+                message : "Access denied"
+            });
+        }
+
+        const groupInfo = await connection.execute(
+            `
+                SELECT g.group_name, au.full_name as created_by 
+                FROM groups g
+                JOIN app_users au ON g.created_by = au.user_id
+                WHERE g.group_id = :1
+            `,
+            [groupID],
+            { outFormat : db.OUT_FORMAT_OBJECT }
+        );
+
+        const members = await connection.execute(
+            `
+             SELECT 
+                gm.user_id as member_id,
+                au.full_name,
+                au.email,
+                gm.joined_at,
+                g.created_at,
+                CASE
+                    WHEN gm.is_admin = 'Y' 
+                        THEN 'Admin'
+                    ELSE 
+                        'Member'
+                END
+                AS role
+                FROM group_members gm
+                JOIN app_users au 
+                    ON gm.user_id = au.user_id
+                JOIN groups g
+                    ON gm.group_id = g.group_id
+                WHERE gm.group_id = :1
+                ORDER BY gm.is_admin DESC, gm.joined_at
+            `,
+            [groupID],
+            { outFormat : db.OUT_FORMAT_OBJECT }
+        );
+
+         res.json({
+            success: true,
+            group: groupInfo.rows[0],
+            members : members.rows
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success : false,
+            message : "Error at controller!"
+        });
+    } finally {
+        if(connection) await connection.close();
+    }
+}

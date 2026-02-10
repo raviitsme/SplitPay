@@ -27,16 +27,17 @@ switchToRegister.addEventListener("click", e => {
 const params = new URLSearchParams(window.location.search);
 const mode = params.get('mode');
 
-if (mode === 'login') {
-    loginForm.classList.add('active');
-    registerForm.classList.remove('active');
-} else if (mode === 'register') {
+// reset first (important)
+loginForm.classList.remove('active');
+registerForm.classList.remove('active');
+
+if (mode === 'register') {
     registerForm.classList.add('active');
-    loginForm.classList.remove('active');
 } else {
+    // default to login ONLY if mode is missing or invalid
     loginForm.classList.add('active');
-    registerForm.classList.remove('active');
 }
+
 
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -135,3 +136,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     }
 })
 
+function redirectToLandingPage() {
+    window.location.replace('../Landing Page/index.html');
+}

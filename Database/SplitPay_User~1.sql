@@ -106,3 +106,21 @@ join groups g on gm.group_id = g.group_id
 join app_users au on g.created_by = au.user_id
 where gm.user_id = 61
 order by g.group_id desc;
+
+SELECT 1 FROM group_members 
+WHERE group_id = 19 AND user_id = 63;
+
+SELECT
+    gm.user_id        AS member_id,
+    au.full_name,
+    au.email,
+    gm.joined_at,
+    CASE
+        WHEN gm.is_admin = 'Y' THEN 'Admin'
+        ELSE 'Member'
+    END AS role
+FROM group_members gm
+JOIN app_users au 
+    ON gm.user_id = au.user_id
+WHERE gm.group_id = 41
+ORDER BY gm.is_admin DESC, gm.joined_at;

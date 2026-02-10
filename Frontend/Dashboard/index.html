@@ -97,23 +97,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="groupsTableBody">
-                        <!-- <tr>
-                            <td>#G001</td>
-                            <td>Roommates</td>
-                            <td>Rahul</td>
-                        </tr>
-                        <tr>
-                            <td>#G002</td>
-                            <td>Goa Trip</td>
-                            <td>Ananya</td>
-                        </tr>
-                        <tr>
-                            <td>#G003</td>
-                            <td>Office Lunch</td>
-                            <td>You</td>
-                        </tr> -->
-                    </tbody>
+                    <tbody id="groupsTableBody"></tbody>
                 </table>
 
                 <div class="groups-empty" id="groupsEmpty">
@@ -122,6 +106,24 @@
                     <span>Create a group to start splitting expenses</span>
                 </div>
 
+
+            </section>
+            <section class="page" id="group-details">
+                <header class="groups-header">
+                    <div class="groups-title">
+                        <h1 id="groupTitle">Group</h1>
+                        <p id="groupSubtitle">Group details</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="backToGroups()">← Back</button>
+                </header>
+                <div class="group-info-card">
+                    <h3>Members</h3>
+                    <ul id="groupMembersList"></ul>
+                </div>
+                <div class="group-info-card">
+                    <h3>Expenses</h3>
+                    <p style="opacity: 0.6;">No expenses yet</p>
+                </div>
 
             </section>
 

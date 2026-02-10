@@ -373,7 +373,7 @@ html[data-theme="dark"] .theme::before {
 }
 
 .actions button:hover {
-    color: #fff;
+    color: var(--text-main);
 }
 
 
